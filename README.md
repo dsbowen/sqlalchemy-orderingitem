@@ -2,8 +2,6 @@
 
 SQLAlchemy-OrderingItem provides an OrderingItem base for children of [`orderinglist`](https://docs.sqlalchemy.org/en/13/orm/extensions/orderinglist.html) relationships. Children of `orderinglist` relationships will exhibit more intuitive behavior when setting their parent attribute.
 
-Readers can find the source code at [https://github.com/dsbowen/sqlalchemy-orderingitem](https://github.com/dsbowen/sqlalchemy-orderingitem).
-
 ## License
 
 Publications which use this software should include the following citation for SQLAlchemy-OrderingItem:
@@ -29,7 +27,7 @@ Outputs:
 None
 ```
 
-Behavior if the child had the `OrderingItem` subclass:
+Behavior with the `OrderingItem` subclass:
 
 ```python
 child.parent = parent
