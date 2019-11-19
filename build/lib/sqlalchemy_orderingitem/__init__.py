@@ -8,17 +8,37 @@ The OrderingItem subclass ensures that setting the child's parent attribute give
 from sqlalchemy.inspection import inspect
 
 class OrderingItem():
-    # Map attribute name to indicator that the attr is a parent of an 
-    # orderinglist relationship to this class
-    _orderinglist_parent_indicator = {}
-    # Map orderinglist parent name to (childlist, order_by) tuple
-    _orderinglist_parent_attrs = {}
+    _exempt_attrs = [
+        '_orderinglist_parent_indicator', '_orderinglist_parent_attrs'
+    ]
+
+    def __new__(cls, *args, **kwargs):
+        """
+        Set class orderinglist parent indicators and orderinglist parent 
+        attributes.
+
+        orderinglist_parent_indicator maps attribute name to indicator that 
+        the attribute is a parent of an orderinglist relationship to self.
+
+        orderinglist_parent_attrs maps parent name to (childlist, order_by) 
+        tuple.
+        """
+        if not hasattr(cls, '_orderinglist_parent_indicator'):
+            cls._orderinglist_parent_indicator = {}
+            cls._orderinglist_parent_attrs = {}
+        try:
+            return super().__new__(cls, *args, **kwargs)
+        except:
+            return super().__new__(cls)
 
     def __setattr__(self, name, value):
         """Set attribute
 
         Before setting an attribute, determine if it is the parent of an orderinglist relationship to self. If so, use append insead of set to add self to the parent's list of children.
         """
+        if name in self._exempt_attrs:
+            super().__setattr__(name, value)
+            return
         is_parent = self._orderinglist_parent_indicator.get(name)
         if is_parent is None:
             is_parent = self._set_orderinglist_parent(name)
@@ -57,7 +77,10 @@ class OrderingItem():
         orderinglist parent status for an attribute which has a relationship 
         to self.
         """
-        reverse_rel = list(rel[0]._reverse_property)[0]
+        reverse_rel = list(rel[0]._reverse_property)
+        if not reverse_rel:
+            return False
+        reverse_rel = reverse_rel[0]
         cc = reverse_rel.collection_class
         if (
             hasattr(cc, '__module__') 

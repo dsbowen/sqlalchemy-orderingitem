@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: sqlalchemy-orderingitem
-Version: 0.0.1
+Version: 0.0.2
 Summary: SQLAlchemy-OrderingItem provides an OrderingItem base for children of orderinglist relationships.
 Home-page: https://github.com/dsbowen/sqlalchemy-orderingitem
 Author: Dillon Bowen

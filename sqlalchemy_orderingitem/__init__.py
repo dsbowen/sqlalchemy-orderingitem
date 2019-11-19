@@ -77,7 +77,10 @@ class OrderingItem():
         orderinglist parent status for an attribute which has a relationship 
         to self.
         """
-        reverse_rel = list(rel[0]._reverse_property)[0]
+        reverse_rel = list(rel[0]._reverse_property)
+        if not reverse_rel:
+            return False
+        reverse_rel = reverse_rel[0]
         cc = reverse_rel.collection_class
         if (
             hasattr(cc, '__module__') 
