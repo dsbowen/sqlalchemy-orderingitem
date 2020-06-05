@@ -1,3 +1,5 @@
+# SQLAlchemy-OrderingItem
+
 SQLAlchemy-OrderingItem provides an `OrderingItem` base for children of [`orderinglist`](https://docs.sqlalchemy.org/en/13/orm/extensions/orderinglist.html) relationships. Children of `orderinglist` relationships will exhibit more intuitive behavior when setting their parent attribute.
 
 ## Installation

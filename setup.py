@@ -5,17 +5,17 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sqlalchemy-orderingitem",
-    version="0.0.3",
+    version="0.0.4",
     author="Dillon Bowen",
     author_email="dsbowen@wharton.upenn.edu",
     description="SQLAlchemy-OrderingItem provides an OrderingItem base for children of orderinglist relationships.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dsbowen/sqlalchemy-orderingitem",
+    url="https://dsbowen.github.io/sqlalchemy-orderingitem,
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=[
-        'sqlalchemy==1.3.12',
+        'sqlalchemy>=1.3.12',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
